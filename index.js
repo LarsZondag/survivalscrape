@@ -10,7 +10,13 @@ const fetchData = async () => {
 fetchData().then(value => {
   $ = value;
   const wedstrijdagenda = $('table.wedstrijdagenda');
-  console.log(wedstrijdagenda.text());
-});
+  const runs = wedstrijdagenda.find('tr').slice(1).map((i, element) => ({
+    date: $(element).find('td:nth-of-type(1)').text().trim(),
+    location: $(element).find('td:nth-of-type(2)').text().trim(),
+    distances: $(element).find('td:nth-of-type(8)').text().trim()
+  })).get();
 
+
+  console.log(runs);
+});
 
