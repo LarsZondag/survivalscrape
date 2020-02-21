@@ -1,6 +1,7 @@
 const siteUrl = "https://www.uvponline.nl/uvponlineU/index.php/uvproot/wedstrijdschema/2019";
 const axios = require("axios");
 const cheerio = require("cheerio");
+const functions = require("./tableToJson");
 
 const fetchData = async () => {
   const result = await axios.get(siteUrl);
@@ -10,12 +11,9 @@ const fetchData = async () => {
 fetchData().then(value => {
   $ = value;
   const wedstrijdagenda = $('table.wedstrijdagenda');
-  const runs = wedstrijdagenda.find('tr').slice(1).map((i, element) => ({
-    date: $(element).find('td:nth-of-type(1)').text().trim(),
-    location: $(element).find('td:nth-of-type(2)').text().trim(),
-    distances: $(element).find('td:nth-of-type(8)').text().trim()
-  })).get();
-
+  const runs = functions.tableToJson(wedstrijdagenda, {
+    headers: ['date', 'location', 'LSR', 'MSR', 'KSR', 'JSR', 'qualifier', 'distances', 'min_age', 'organiser', 'enroll_link', 'results_link']
+  })
 
   console.log(runs);
 });
