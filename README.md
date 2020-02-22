@@ -1,5 +1,23 @@
 # survivalscrape
 
+## Installation guide
+Make sure you have `postgresql` installed and the service running.
+
+```
+cp .env.example .env
+```
+Edit the `.env` to reflect your settings.
+
+```
+npm install
+npx sequelize-cli db:migrate
+```
+
+Execute the `index.js` script:
+```
+node index.js
+```
+
 ## UVP online id's
 
 
