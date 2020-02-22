@@ -1,4 +1,5 @@
 module.exports = {
+  seasons: [2018, 2019],
   members: [
     {
       name: 'Dorien',
