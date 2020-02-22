@@ -58,7 +58,7 @@ module.exports = {
           }
         } else {
           value = el.text().trim();
-          value = !isNaN(value) ? +value : value;
+          value = !isNaN(value) && value !== '' ? +value : value;
         }
         const property = R.has('headers', options) ? options.headers[index] : index;
         if (value !== '') values[property] = value;
