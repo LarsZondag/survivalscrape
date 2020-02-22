@@ -1,4 +1,4 @@
-const siteUrl = "https://www.uvponline.nl/uvponlineF/inschrijven/431"; // Inschrijflink
+const siteUrl = "https://www.uvponline.nl/uvponlineF/inschrijven_overzicht/431"; // Inschrijflink
 const axios = require("axios");
 const cheerio = require("cheerio");
 
@@ -9,7 +9,7 @@ const fetchData = async () => {
 
 fetchData().then(value => {
   $ = value;
-  const uitslagen = $('table.inschrijven_button_overzicht1');
+  const inschrijflinks = $('#ingeschreven_cats a');
   
-  console.log(uitslagen);
+  console.log(inschrijflinks);
 });
