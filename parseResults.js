@@ -2,8 +2,6 @@ const siteUrl = "https://www.uvponline.nl/uvponlineU/index.php/uitslag/toonuitsl
 const axios = require("axios");
 const cheerio = require("cheerio");
 const functions = require("./functions");
-const R = require('ramda');
-const app = require("./app");
 
 const fetchData = async () => {
   const result = await axios.get(siteUrl);
@@ -16,7 +14,7 @@ fetchData().then(value => {
   const participants = functions.tableToJson(uitslagen, {
     headers: ['place','name','lastname','residence','age','startnum','time','missedOb','points']
   });
-  const member_participants = R.innerJoin(R.eqBy(R.props(['name', 'lastname', 'residence'])), participants, app.members);
+  const member_participants = functions.filterMembers(participants);
   console.log(member_participants);
 
 });

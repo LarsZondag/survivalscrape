@@ -1,5 +1,6 @@
 const R = require('ramda');
 const $ = require('cheerio');
+const app = require('./app.js');
 
 // plural of findIndex
 function findIndices(fn, list) {
@@ -57,6 +58,7 @@ module.exports = {
           }
         } else {
           value = el.text().trim();
+          value = !isNaN(value) ? +value : value;
         }
         const property = R.has('headers', options) ? options.headers[index] : index;
         if (value !== '') values[property] = value;
@@ -69,6 +71,11 @@ module.exports = {
     let indices = findIndices(fn, list);
     indices = R.drop(1, indices);
     return splitIndices(indices, list);
+  },
+
+  filterMembers: function(list) {
+    return R.innerJoin(R.eqBy(R.props(['name', 'lastname', 'residence'])), list, app.members);
   }
+  
   
 }
