@@ -15,5 +15,35 @@ module.exports = {
       lastname: 'de Vries',
       residence: 'Delft'
     }
+    {
+      name: 'Luuk',
+      lastname: 'Balkenende',
+      residence: 'Delft'
+    }
+    {
+      name: 'Arjan',
+      lastname: 'de Kater',
+      residence: 'Delft'
+    }
+    {
+      name: 'Max',
+      lastname: 'Spier',
+      residence: 'Delft'
+    }
+    {
+      name: 'Jorgis',
+      lastname: 'Theodoulou',
+      residence: 'Delft'
+    }
+    {
+      name: 'Pim',
+      lastname: 'Vree',
+      residence: 'Delft'
+    }
+    {
+      name: 'Jeroen',
+      lastname: 'Punt',
+      residence: 'Delft'
+    }
   ]
 }
