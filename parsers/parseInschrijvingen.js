@@ -1,7 +1,7 @@
 const siteUrl = "https://www.uvponline.nl/uvponlineF/inschrijven_overzicht/440/1006";
 const axios = require("axios");
 const cheerio = require("cheerio");
-const functions = require("./functions");
+const functions = require("../functions");
 
 const fetchData = async () => {
   const result = await axios.get(siteUrl);

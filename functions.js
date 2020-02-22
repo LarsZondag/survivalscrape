@@ -1,6 +1,7 @@
+const axios = require('axios');
+const app = require('./app.js');
 const R = require('ramda');
 const $ = require('cheerio');
-const app = require('./app.js');
 
 // plural of findIndex
 function findIndices(fn, list) {
@@ -75,7 +76,10 @@ module.exports = {
 
   filterMembers: function(list) {
     return R.innerJoin(R.eqBy(R.props(['name', 'lastname', 'residence'])), list, app.members);
+  },
+  
+  getUrl: async function(siteUrl) {
+    const result = await axios.get(siteUrl);
+    return $.load(result.data);
   }
-  
-  
 }

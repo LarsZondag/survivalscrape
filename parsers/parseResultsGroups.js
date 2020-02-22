@@ -1,7 +1,7 @@
-const siteUrl = "https://www.uvponline.nl/uvponlineF/inschrijven_overzicht/478/1231";
+const siteUrl = "https://www.uvponline.nl/uvponlineU/index.php/uitslag/toonuitslagcat/794/1168/T";
 const axios = require("axios");
 const cheerio = require("cheerio");
-const functions = require("./functions");
+const functions = require("../functions");
 const R = require('ramda');
 
 const fetchData = async () => {
@@ -11,21 +11,25 @@ const fetchData = async () => {
 
 fetchData().then(value => {
   $ = value;
-  const inschrijvingen = $('#overzicht_groep');
-  const runners = functions.tableToJson(inschrijvingen, {
+  const uitslagen = $('table.tbl-border');
+  const runners = functions.tableToJson(uitslagen, {
     headers: [
+      'place',
       'groupname',
-      'lastname',
       'name',
+      'lastname',
       'residence',
-      'gender'
+      'startnum',
+      'time',
+      'missedOb',
+      'points'
     ]
   });
-  
+
   let groups = functions.splitOn(R.has('groupname'), runners);
   groups = R.map(participants => {
-    group = R.pick(['groupname'], participants[0])
-    participants = R.map(R.pick(['lastname', 'name', 'residence']), participants);
+    group = R.pick(['place', 'groupname', 'startnum', 'time', 'missedOb', 'points'], participants[0])
+    participants = R.map(R.pick(['name', 'lastname', 'residence']), participants);
     return R.assoc('participants', participants, group);
   }, groups)
   console.log(groups);
