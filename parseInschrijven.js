@@ -11,5 +11,10 @@ fetchData().then(value => {
   $ = value;
   const inschrijflinks = $('#ingeschreven_cats a');
   
-  console.log(inschrijflinks);
+  console.log(inschrijflinks.map((i, element) => {
+    return {
+      link: element.attribs.href.split('/')[element.attribs.href.split('/').length - 1],
+      category: $(element).text()
+    };
+  }).get());
 });
